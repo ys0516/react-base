@@ -1,0 +1,6 @@
+/**
+ * Created by Ysssssss on 19/4/17.
+ */
+
+export const CUSTOMIZE_REPORT_DIMENSION = 'CUSTOMIZE_REPORT_DIMENSION'
+export const CUSTOMIZE_REPORT_NUMBER = 'CUSTOMIZE_REPORT_NUMBER'

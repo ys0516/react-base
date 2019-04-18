@@ -9,9 +9,10 @@ import { Provider } from 'react-redux'
 
 import routes from './routes'
 import configureStore from './store/configureStore'
+
+import './stylesheets/main.scss'
+
 const store = configureStore()
-
-
 
 ReactDOM.render(
     <Provider store={store}>

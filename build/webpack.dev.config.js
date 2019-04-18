@@ -4,11 +4,11 @@
 const path = require('path')
 const webpack = require('webpack')
 const baseConfig = require('./webpack.base.config.js')
-const WebpackDevServer = require('webpack-dev-server')
 const merge = require('webpack-merge');
 const PORT = process.env.PORT || 8000 // 默认8000端口，可以通过package.json配置
 
 const config = merge(baseConfig, {
+    devtool: 'source-map',
     devServer: {
         // 作为服务器发布的目录
         contentBase: path.resolve(__dirname, '../src'),
