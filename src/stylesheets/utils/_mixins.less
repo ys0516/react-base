@@ -1,56 +1,56 @@
-@mixin flex() {
+.flex() {
     display: flex;
 }
 
-@mixin flex-center() {
-    @include flex();
+.flex-center() {
+    .flex();
     justify-content: center;
     align-items: center;
 }
-@mixin flex-vertical-center() {
-    @include flex();
+.flex-vertical-center() {
+    .flex();
     align-items: center;
 }
 
-@mixin flex-horizontal-center() {
-    @include flex();
+.flex-horizontal-center() {
+    .flex();
     justify-content: center;
 }
 
-@mixin flex-row-between() {
-    @include flex();
+.flex-row-between() {
+    .flex();
     justify-content: space-between;
     align-items: center;
 }
 
-@mixin overflow-hidden () {
+.overflow-hidden () {
     overflow: hidden;
 }
-@mixin overflow-x {
-    @include overflow-hidden;
+.overflow-x {
+    .overflow-hidden();
     overflow-x: auto;
 }
-@mixin overflow-y {
-    @include overflow-hidden;
+.overflow-y {
+    .overflow-hidden();
     overflow-y: auto;
 }
 
-@mixin text-overflow() {
+.text-overflow() {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-@mixin text-overflow-line($num) {
+.text-overflow-line(@num) {
     word-break: break-all;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: $num;
+    -webkit-line-clamp: @num;
     overflow: hidden;
 }
 
-@mixin clearfix() {
+.clearfix() {
     &:after {
         visibility: hidden;
         display: block;

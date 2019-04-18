@@ -29,6 +29,15 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
             },
             {
+                test: /\.less$/,
+                use: ["style-loader", "css-loader", 'postcss-loader', {
+                    loader: "less-loader",
+                    options: {
+                        javascriptEnabled: true
+                    }
+                }]
+            },
+            {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader', 'postcss-loader']
             },
@@ -44,7 +53,7 @@ module.exports = {
     },
     resolve: {
         modules: [path.resolve(__dirname, "src"), "node_modules"],
-        extensions: ['.js','.jsx','.scss','.css'],
+        extensions: ['.js','.jsx','.scss','.less','.css'],
     },
     plugins: [
         new HTMLWebpackPlugin({

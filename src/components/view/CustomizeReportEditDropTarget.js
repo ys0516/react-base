@@ -2,7 +2,8 @@
  * Created by Ysssssss on 19/4/17.
  */
 
-import React, { PureComponent, PropTypes } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types';
 
 
 import { DropTarget } from 'react-dnd'
@@ -26,6 +27,10 @@ const dropTargetCollect = (connect, monitor) => {
 
 @DropTarget(props => props.type, dropTargetSpec, dropTargetCollect)
 class CustomizeReportEditDropTarget extends PureComponent {
+    static propTypes = {
+        type: PropTypes.string,
+        handleDragDrop: PropTypes.func,
+    }
     render () {
         const { type, connectDropTarget, isActivity } = this.props
         const isDimension = type === CUSTOMIZE_REPORT_DIMENSION

@@ -2,8 +2,9 @@
  * Created by Ysssssss on 19/4/17.
  */
 
-import React, { PureComponent, PropTypes } from 'react'
-import { Icon } from 'antd'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types';
+import { Icon } from 'rsuite'
 
 import { DragSource } from 'react-dnd'
 import { CUSTOMIZE_REPORT_DIMENSION } from '../../constants/DndType'
@@ -34,6 +35,13 @@ const dropSourceCollect = (connect, monitor) => {
 
 @DragSource(props => props.type, dragConfig, dropSourceCollect)
 class CustomizeReportEditDropSource extends PureComponent {
+    static propTypes = {
+        id: PropTypes.number,
+        type: PropTypes.string,
+        name: PropTypes.string,
+        selectedByFilter: PropTypes.bool,
+        selectedByTable: PropTypes.bool,
+    }
     render () {
         const { type, name, selectedByFilter, selectedByTable, connectDragSource, connectDragPreview, isDragging } = this.props
         const isDimension = type === CUSTOMIZE_REPORT_DIMENSION

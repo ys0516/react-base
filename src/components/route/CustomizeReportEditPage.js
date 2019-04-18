@@ -2,14 +2,17 @@
  * Created by Ysssssss on 19/4/16.
  */
 
-import React, { PureComponent, PropTypes } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
-import { Button, Icon } from 'antd'
+import { Icon } from 'rsuite'
 import { DragDropContextProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
+import CustomizeReportEditPageHeader from '../view/CustomizeReportEditPageHeader'
 import CustomizeReportEditDropTarget from '../view/CustomizeReportEditDropTarget'
 import CustomizeReportEditDropSource from '../view/CustomizeReportEditDropSource'
+import CustomizeReportEditPagePreview from '../view/CustomizeReportEditPagePreview'
 
 import { CUSTOMIZE_REPORT_NUMBER, CUSTOMIZE_REPORT_DIMENSION } from "../../constants/DndType";
 import { arrayToObject } from "../../utils/arrayHelper";
@@ -34,6 +37,7 @@ class CustomizeReportEditPage extends PureComponent {
     constructor (props) {
         super (props)
         this.state = {
+            name: '测试报表名称',
             filterIdList: [],
             dimensionIdList: [],
             contrastIdList: [],
@@ -41,6 +45,14 @@ class CustomizeReportEditPage extends PureComponent {
         }
     }
 
+    // 修改报表名称
+    handleReportNameChange = (name) => {
+        this.setState({
+            name,
+        })
+    }
+
+    // 又可选项移入判断
     handleDragDrop = ({ id, setting }) => {
         const key = `${setting}IdList`
         if (this.state[key].includes(id)) return;
@@ -71,14 +83,7 @@ class CustomizeReportEditPage extends PureComponent {
             <DragDropContextProvider className="customize-report-edit-page"
                                      backend = { HTML5Backend }
             >
-                <div className="customize-report-edit-page-header">
-                    <div className="customize-report-title">测试报表名称</div>
-                    <div className="customize-report-edit-operation">
-                        <Button>取消</Button>
-                        <Button type="primary">保存</Button>
-                        <Button type="primary">保存并退出</Button>
-                    </div>
-                </div>
+                <CustomizeReportEditPageHeader />
                 <div className="customize-report-edit-page-body">
                     <div className="customize-report-edit-option-block">
                         <div className="customize-report-edit-option-block-dimension">
@@ -177,7 +182,7 @@ class CustomizeReportEditPage extends PureComponent {
                         </div>
                         <div className="customize-report-edit-filter-block-sort">
                             <div className="filter-block-title">
-                                <Icon type="sort-ascending" />
+                                <Icon type="sort" />
                                 <span>表格排序</span>
                             </div>
                             <div className="option-block-item">
@@ -185,6 +190,7 @@ class CustomizeReportEditPage extends PureComponent {
                             </div>
                         </div>
                     </div>
+                    <CustomizeReportEditPagePreview />
                 </div>
             </DragDropContextProvider>
         )

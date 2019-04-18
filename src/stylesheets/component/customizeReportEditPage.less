@@ -3,14 +3,14 @@
     width: 100%;
     height: 100%;
     font-size: 12px;
-    color: $font-color-default;
+    color: @font-color-default;
     line-height: 1.5;
     &-header {
         position: relative;
         width: 100%;
-        height: $header-height;
+        height: @header-height;
         padding: 0 16px;
-        @include flex-row-between;
+        .flex-row-between();
         box-shadow: 0 2px 4px 0 rgba(59, 63, 72, 0.15);
         z-index: 1;
         .customize-report-title {
@@ -18,7 +18,7 @@
             font-weight: bold;
         }
         .customize-report-edit-operation {
-            .ant-btn {
+            .rs-btn {
                 min-width: 74px;
                 height: 28px;
                 margin: 0 5px;
@@ -28,17 +28,17 @@
     &-body {
         position: absolute;
         width: 100%;
-        top: $header-height;
+        top: @header-height;
         bottom: 0;
         .customize-report-edit-option-block, .customize-report-edit-filter-block {
             position: relative;
             height: 100%;
-            @include overflow-y;
+            .overflow-y();
             float: left;
             border-right: 1px solid #EAECF0;
         }
         .customize-report-edit-option-block {
-            width: $option-block-width;
+            width: @option-block-width;
             padding: 10px;
             padding-top: 0;
             background-color: #F9F9FA;
@@ -46,7 +46,7 @@
                 position: relative;
                 padding: 5px 10px;
                 margin-top: 10px;
-                color: $font-color-grey-light;
+                color: @font-color-grey-light;
             }
             .option-block-item {
                 position: relative;
@@ -71,25 +71,25 @@
                     padding: 0 10px;
                 }
                 .preview-item {
-                    @include flex-row-between;
+                    .flex-row-between();
                     background-color: #F9F9FA;
                     &-title {
                         &-icon {
                             margin-right: 5px;
                             &.dimension {
-                                color: $dimension-icon-color;
+                                color: @dimension-icon-color;
                             }
                             &.number {
-                                color: $data-icon-color;
+                                color: @data-icon-color;
                             }
                         }
                     }
                     &-type {
-                        .anticon {
-                            color: $icon-light-grey;
+                        .rs-icon {
+                            color: @icon-light-grey;
                             margin: 0 5px;
                             &.selected {
-                                color: $filter-icon-color;
+                                color: @filter-icon-color;
                             }
                         }
                     }
@@ -100,14 +100,14 @@
                     }
                 }
                 .drag-item {
-                    @include flex-vertical-center;
+                    .flex-vertical-center();
                     color: #fff;
                     border-radius:2px;
                     &.dimension {
-                        background-color: $blue;
+                        background-color: @blue;
                     }
                     &.number {
-                        background-color: $origin;
+                        background-color: @origin;
                     }
                     &-icon {
                         margin-right: 5px;
@@ -116,23 +116,23 @@
             }
         }
         .customize-report-edit-filter-block {
-            width: $filter-block-width;
+            width: @filter-block-width;
             padding: 10px;
             padding-top: 0;
             .filter-block-title {
                 position: relative;
                 padding: 5px 10px;
-                color: $font-color-grey-light;
+                color: @font-color-grey-light;
                 margin-top: 10px;
-                .anticon {
-                    color: $filter-icon-color;
+                .rs-icon {
+                    color: @filter-icon-color;
                     margin-right: 5px;
                 }
             }
             .filter-block-sub-title {
                 position: relative;
                 padding: 5px 10px;
-                color: $font-color-grey;
+                color: @font-color-grey;
                 margin-top: -5px;
             }
             .filter-selected-item {
@@ -143,12 +143,12 @@
                 border-radius: 2px;
                 margin-bottom: 10px;
                 color: #fff;
-                @include flex-vertical-center;
+                .flex-vertical-center();
                 &.dimension {
-                    background-color: $blue;
+                    background-color: @blue;
                 }
                 &.number {
-                    background-color: $origin;
+                    background-color: @origin;
                 }
                 &-icon {
                     margin-right: 5px;
@@ -158,11 +158,11 @@
                 position: relative;
                 width: 100%;
                 height: 26px;
-                color: $font-color-grey-light;
+                color: @font-color-grey-light;
                 border: 1px dashed #E6E6E6;
                 border-radius: 2px;
                 margin-bottom: 10px;
-                @include flex-center;
+                .flex-center();
                 &-icon {
                     color: #C6CAD3;
                     margin-right: 5px;
@@ -170,6 +170,49 @@
                 &.activity {
                     background-color: #F4F9FF;
                     border-color: #138DE9;
+                }
+            }
+        }
+        .customize-report-edit-preview-block {
+            position: relative;
+            width: @preview-block-width;
+            height: 100%;
+            .overflow-y();
+            float: left;
+            padding: 10px 20px;
+            .preview-block-title {
+                width: 100%;
+                font-weight: bold;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #F7F7F7;
+            }
+            .preview-block-params {
+                position: relative;
+                margin: 20px 0;
+                .clearfix();
+                .params-box {
+                    position: relative;
+                    height: 28px;
+                    margin: 0 20px 10px 0;
+                    float: left;
+                    .flex-vertical-center();
+                    .params-label {
+                        margin-right: 10px;
+                    }
+                    .params-value {
+                        width: 180px;
+                        height: 28px;
+                        .ant-calendar-picker-input {
+                            height: 28px;
+                            padding-top: 0;
+                            padding-bottom: 0;
+                        }
+                    }
+                }
+                .params-button {
+                    width: 80px;
+                    height: 28px;
+                    float: left;
                 }
             }
         }

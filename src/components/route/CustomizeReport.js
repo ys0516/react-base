@@ -1,7 +1,8 @@
 /**
  * Created by Ysssssss on 19/4/15.
  */
-import React, { PureComponent, PropTypes } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types';
 
 class CustomizeReport extends PureComponent {
     render () {
