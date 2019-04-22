@@ -5,7 +5,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
-import { Icon } from 'rsuite'
+import { Icon, Dropdown } from 'rsuite'
 import { DragDropContextProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
@@ -42,6 +42,8 @@ class CustomizeReportEditPage extends PureComponent {
             dimensionIdList: [],
             contrastIdList: [],
             numberIdList: [],
+            lastDropId: '',
+            defaultMap: {},
         }
     }
 
@@ -60,7 +62,8 @@ class CustomizeReportEditPage extends PureComponent {
             [key]: [
                 ...this.state[key],
                 id
-            ]
+            ],
+            lastDrop: `${key}_${id}`
         })
     }
 
@@ -78,7 +81,7 @@ class CustomizeReportEditPage extends PureComponent {
 
     render () {
         const { dimensionItemList, numberItemList, dimensionItemMap, numberItemMap } = this.props
-        const { filterIdList, dimensionIdList, contrastIdList, numberIdList } = this.state
+        const { filterIdList, dimensionIdList, contrastIdList, numberIdList, lastDrop } = this.state
         return (
             <DragDropContextProvider className="customize-report-edit-page"
                                      backend = { HTML5Backend }
@@ -115,16 +118,26 @@ class CustomizeReportEditPage extends PureComponent {
                     <div className="customize-report-edit-filter-block">
                         <div className="customize-report-edit-filter-block-filter">
                             <div className="filter-block-title">
-                                <Icon type="filter" />
+                                <Icon icon="filter" />
                                 <span>筛选项配置</span>
                             </div>
                             { (filterIdList || []).map(id => {
                                 const item = dimensionItemMap[id] || {}
                                 return (
-                                    <div className="filter-selected-item dimension">
-                                        <span className="filter-selected-item-icon">abc</span>
-                                        <span>{ item.name }</span>
-                                    </div>
+                                    <Dropdown
+                                        key={`filter_${id}`}
+                                        className={`filter-selected-item dimension${lastDrop === `filterIdList_${id}` ? ' rs-dropdown-open' : ''}`}
+                                        toggleComponentClass="div"
+                                        renderTitle={ () => (
+                                            <div>
+                                                <span className="filter-selected-item-icon">abc</span>
+                                                <span>{ item.name }</span>
+                                            </div>
+                                        )}
+                                    >
+                                        <Dropdown.Item >当月</Dropdown.Item>
+                                        <Dropdown.Item >上一个月</Dropdown.Item>
+                                    </Dropdown>
                                 )
                             }) }
                             <CustomizeReportEditDropTarget
@@ -134,7 +147,7 @@ class CustomizeReportEditPage extends PureComponent {
                         </div>
                         <div className="customize-report-edit-filter-block-table">
                             <div className="filter-block-title">
-                                <Icon type="table" />
+                                <Icon icon="table" />
                                 <span>表格项配置</span>
                             </div>
                             <div className="filter-block-sub-title">维度</div>
@@ -182,7 +195,7 @@ class CustomizeReportEditPage extends PureComponent {
                         </div>
                         <div className="customize-report-edit-filter-block-sort">
                             <div className="filter-block-title">
-                                <Icon type="sort" />
+                                <Icon icon="sort" />
                                 <span>表格排序</span>
                             </div>
                             <div className="option-block-item">

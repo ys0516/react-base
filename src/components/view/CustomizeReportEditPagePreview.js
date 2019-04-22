@@ -4,8 +4,29 @@
 
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
 
 import { Select, DateRangePicker, Button } from 'rsuite'
+
+import {
+    testAction
+} from "../../action/CustomizeReport";
+
+function mapStateToProps (state) {
+    const { customizeReport } = state
+    const { dimensionItemList, numberItemList } = customizeReport
+    return {
+        dimensionItemList,
+        numberItemList
+    }
+}
+
+@connect(
+    mapStateToProps,
+    {
+        testAction
+    }
+)
 
 class CustomizeReportEditPagePreview extends PureComponent {
     static propTypes = {
@@ -27,11 +48,15 @@ class CustomizeReportEditPagePreview extends PureComponent {
                             className="params-value"
                             style={{width: '240px'}}
                             placeholder="筛选时间段"
+
                         />
                     </div>
-                    <Button appearance="primary" className="params-button">搜索</Button>
+                    <Button appearance="primary" className="params-button" onClick={() => {
+                        this.props.testAction()
+                    }}>搜索</Button>
                 </div>
                 <div className="preview-block-title">表格</div>
+
             </div>
         )
     }

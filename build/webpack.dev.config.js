@@ -22,6 +22,16 @@ const config = merge(baseConfig, {
         // 是否在浏览器蒙层展示错误信息
         overlay: true,
         inline: true,
+
+        proxy: {
+            '/api': {
+                target: 'http://dev.luedongtech.com:8020',
+                changeOrigin: true,
+                pathRewrite: {
+                    '/api': ''
+                }
+            }
+        },
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin()
