@@ -1,13 +1,42 @@
 /**
- * Created by Ysssssss on 19/4/15.
+ * Created by Ysssssss on 19/4/22.
  */
+
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types';
-import { Table } from 'rsuite';
+import { Table, Breadcrumb } from 'rsuite';
 const { Column, HeaderCell, Cell, Pagination } = Table;
 
-class CustomizeReport extends PureComponent {
+import { tablePaginationProps } from "../../constants/TableProps";
+import { getParentNode } from "../../utils/getParentNode";
+
+class CustomizeReportList extends PureComponent {
+    constructor (props) {
+        super (props)
+        this.state = {
+            tableHeight: 400,
+            page: 1,
+            displayLength: tablePaginationProps.lengthMenu[0].value
+        }
+    }
+
+    componentDidMount() {
+        const tableHeight = this.calcHeight() || 400
+        this.setState({
+            tableHeight
+        })
+    }
+
+    calcHeight = () => {
+        const { tableLocation } = this.refs
+        if (tableLocation) {
+            const tableContainer = getParentNode(tableLocation, 'table-container')
+            return tableContainer.offsetHeight - tableLocation.offsetTop - 20
+        }
+        return 400
+    }
+
     render () {
+        const { tableHeight } = this.state
         const fakeData = [
             {
                 "inner_amount": 0,
@@ -299,100 +328,107 @@ class CustomizeReport extends PureComponent {
             }
         ]
         return (
-            <div>
-            <Table
-                virtualized
-                bordered
-                cellBordered
-                height={400}
-                headerHeight={80}
-                data={fakeData}
-                onRowClick={data => {
-                    console.log(data);
-                }}
-            >
-                <Column width={320} align="center" fixed>
-                    <HeaderCell>时段</HeaderCell>
-                    <Cell dataKey="time_key" />
-                </Column>
-                <Column width={150} colSpan={3}>
-                    <HeaderCell className="header-cell-group">
-                        <div className="header-cell-group-title">时段小计</div>
-                        <div className="header-cell-group-subtitle">
-                            <span style={{ width: 150 }}>订单数</span>
-                            <span style={{ width: 150 }}>营业额(元)</span>
-                            <span style={{ width: 150 }}>平均订单金额(元)</span>
-                        </div>
-                    </HeaderCell>
-                    <Cell dataKey="total_count" />
-                </Column>
-                <Column width={150}>
-                    <HeaderCell />
-                    <Cell dataKey="total_amount" />
-                </Column>
-                <Column width={150}>
-                    <HeaderCell />
-                    <Cell dataKey="price" />
-                </Column>
-                <Column width={150} colSpan={3}>
-                    <HeaderCell className="header-cell-group">
-                        <div className="header-cell-group-title">堂食</div>
-                        <div className="header-cell-group-subtitle">
-                            <span style={{ width: 150 }}>订单数</span>
-                            <span style={{ width: 150 }}>营业额(元)</span>
-                            <span style={{ width: 150 }}>平均订单金额(元)</span>
-                        </div>
-                    </HeaderCell>
-                    <Cell dataKey="inner_count" />
-                </Column>
-                <Column width={150}>
-                    <HeaderCell />
-                    <Cell dataKey="inner_amount" />
-                </Column>
-                <Column width={150}>
-                    <HeaderCell />
-                    <Cell dataKey="inner_price" />
-                </Column>
-                <Column width={150} colSpan={3}>
-                    <HeaderCell className="header-cell-group">
-                        <div className="header-cell-group-title">外卖</div>
-                        <div className="header-cell-group-subtitle">
-                            <span style={{ width: 150 }}>订单数</span>
-                            <span style={{ width: 150 }}>营业额(元)</span>
-                            <span style={{ width: 150 }}>平均订单金额(元)</span>
-                        </div>
-                    </HeaderCell>
-                    <Cell dataKey="waimai_count" />
-                </Column>
-                <Column width={150}>
-                    <HeaderCell />
-                    <Cell dataKey="waimai_amount" />
-                </Column>
-                <Column width={150}>
-                    <HeaderCell />
-                    <Cell dataKey="waimai_price" />
-                </Column>
-                <Column width={120} fixed="right">
-                    <HeaderCell>Action</HeaderCell>
+            <div className="customize-report-list table-container">
+                <Breadcrumb separator={(
+                                <span className="breadcrumb-separator">/</span>
+                            )}
+                >
+                    <Breadcrumb.Item active>自定义报表</Breadcrumb.Item>
+                </Breadcrumb>
+                <div className="table-location" ref="tableLocation"/>
+                <Table
+                    virtualized
+                    bordered
+                    cellBordered
+                    height={tableHeight}
+                    headerHeight={80}
+                    data={fakeData}
+                    onRowClick={data => {
+                        console.log(data);
+                    }}
+                >
+                    <Column width={320} align="center" fixed>
+                        <HeaderCell>时段</HeaderCell>
+                        <Cell dataKey="time_key" />
+                    </Column>
+                    <Column width={150} colSpan={3}>
+                        <HeaderCell className="header-cell-group">
+                            <div className="header-cell-group-title">时段小计</div>
+                            <div className="header-cell-group-subtitle">
+                                <span style={{ width: 150 }}>订单数</span>
+                                <span style={{ width: 150 }}>营业额(元)</span>
+                                <span style={{ width: 150 }}>平均订单金额(元)</span>
+                            </div>
+                        </HeaderCell>
+                        <Cell dataKey="total_count" />
+                    </Column>
+                    <Column width={150}>
+                        <HeaderCell />
+                        <Cell dataKey="total_amount" />
+                    </Column>
+                    <Column width={150}>
+                        <HeaderCell />
+                        <Cell dataKey="price" />
+                    </Column>
+                    <Column width={150} colSpan={3}>
+                        <HeaderCell className="header-cell-group">
+                            <div className="header-cell-group-title">堂食</div>
+                            <div className="header-cell-group-subtitle">
+                                <span style={{ width: 150 }}>订单数</span>
+                                <span style={{ width: 150 }}>营业额(元)</span>
+                                <span style={{ width: 150 }}>平均订单金额(元)</span>
+                            </div>
+                        </HeaderCell>
+                        <Cell dataKey="inner_count" />
+                    </Column>
+                    <Column width={150}>
+                        <HeaderCell />
+                        <Cell dataKey="inner_amount" />
+                    </Column>
+                    <Column width={150}>
+                        <HeaderCell />
+                        <Cell dataKey="inner_price" />
+                    </Column>
+                    <Column width={150} colSpan={3}>
+                        <HeaderCell className="header-cell-group">
+                            <div className="header-cell-group-title">外卖</div>
+                            <div className="header-cell-group-subtitle">
+                                <span style={{ width: 150 }}>订单数</span>
+                                <span style={{ width: 150 }}>营业额(元)</span>
+                                <span style={{ width: 150 }}>平均订单金额(元)</span>
+                            </div>
+                        </HeaderCell>
+                        <Cell dataKey="waimai_count" />
+                    </Column>
+                    <Column width={150}>
+                        <HeaderCell />
+                        <Cell dataKey="waimai_amount" />
+                    </Column>
+                    <Column width={150}>
+                        <HeaderCell />
+                        <Cell dataKey="waimai_price" />
+                    </Column>
+                    <Column width={120} fixed="right">
+                        <HeaderCell>Action</HeaderCell>
 
-                    <Cell>
-                        {rowData => {
-                            function handleAction() {
-                                alert(`time_key:${rowData.time_key}`);
-                            }
-                            return (
-                                <span>
-                                    <a onClick={handleAction}> 编辑 </a>
-                                    <a onClick={handleAction}> 删除 </a>
-                                </span>
-                            );
-                        }}
-                    </Cell>
-                </Column>
-            </Table>
+                        <Cell>
+                            {rowData => {
+                                function handleAction() {
+                                    alert(`time_key:${rowData.time_key}`);
+                                }
+                                return (
+                                    <span>
+                                        <a onClick={handleAction}> 编辑 </a>
+                                        <a onClick={handleAction}> 删除 </a>
+                                    </span>
+                                );
+                            }}
+                        </Cell>
+                    </Column>
+                </Table>
             </div>
         )
     }
 }
 
-export default CustomizeReport
+export default CustomizeReportList
