@@ -4,10 +4,12 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { Router } from 'react-router-dom'
+import { Route } from 'react-router'
+import history from './history';
 import { Provider } from 'react-redux'
 
-import routes from './routes'
+import App from './components/route/App'
 import configureStore from './store/configureStore'
 
 import { IntlProvider } from 'rsuite';
@@ -21,8 +23,8 @@ const store = configureStore()
 ReactDOM.render(
     <IntlProvider locale={zhCN}>
         <Provider store={store}>
-            <Router>
-                { routes }
+            <Router history={history}>
+                <Route path="" component={App} />
             </Router>
         </Provider>
     </IntlProvider>,

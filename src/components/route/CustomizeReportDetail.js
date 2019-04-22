@@ -319,8 +319,8 @@ class CustomizeReportDetail extends PureComponent {
                     <Breadcrumb.Item active>某个表单详情</Breadcrumb.Item>
                 </Breadcrumb>
                 <TableWithPagination
-                    //tableDataList={fakeData || []}
-                    tableDataList={[]}
+                    tableDataList={fakeData || []}
+                    //tableDataList={[]}
                     getNextPage={this.getTableData}
                 >
 

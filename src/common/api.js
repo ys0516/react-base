@@ -4,6 +4,7 @@
 
 
 import axios from 'axios'
+import { getCookie } from "../utils/cookie";
 
 // 环境的切换
 if (process.env.NODE_ENV === 'development') {
@@ -14,11 +15,20 @@ if (process.env.NODE_ENV === 'development') {
 
 axios.defaults.timeout = 10000
 
+axios.defaults.headers = {
+    ...axios.defaults.headers,
+    Authentication: getCookie('accessToken') || ''
+}
+
 //响应拦截器即异常处理
 axios.interceptors.response.use(response => {
     const { data } = response
-    if (data.error_code) {
-        return Promise.reject(data);
+    if (!response.success) {
+        return Promise.reject({
+            code: 200,
+            message: response.msg,
+            error: response.error,
+        });
     }
     return data;
 }, err => {

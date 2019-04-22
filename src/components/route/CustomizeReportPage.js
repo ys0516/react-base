@@ -2,14 +2,13 @@
  * Created by Ysssssss on 19/4/15.
  */
 import React, { PureComponent } from 'react'
-import { Route } from 'react-router'
+import { Route, Switch } from 'react-router'
 
 import CustomizeReportList from './CustomizeReportList'
 import CustomizeReportDetail from './CustomizeReportDetail'
 
 class CustomizeReportPage extends PureComponent {
     render () {
-        const { match } = this.props
         return (
             <div className="customize-report-page">
                 <div className="customize-report-page-header">
@@ -23,8 +22,10 @@ class CustomizeReportPage extends PureComponent {
                 </div>
                 <div className="customize-report-page-body">
                     <div className="customize-report-page-body-content">
-                        <Route path={`${this.props.match.path}list`} component={CustomizeReportList} />
-                        <Route path={`${this.props.match.path}detail/:tableId`} component={CustomizeReportDetail} />
+                        <Switch>
+                            <Route exact path="/" component={CustomizeReportList} />
+                            <Route exact path="/detail/:tableId" component={CustomizeReportDetail} />
+                        </Switch>
                     </div>
                 </div>
             </div>

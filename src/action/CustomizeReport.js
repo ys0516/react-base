@@ -17,6 +17,6 @@ export const testAction = () => (dispatch, getState) => {
     getAxios('/web/v3/brand/list').then(res => {
 
     }).catch(err => {
-        alertError(err.error_message || err.message || 'lalala')
+        alertError(err.message || 'lalala')
     })
 }
