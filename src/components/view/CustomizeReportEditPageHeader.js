@@ -3,6 +3,7 @@
  */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types';
+import history from '../../history'
 
 import { Button } from 'rsuite'
 
@@ -26,12 +27,16 @@ class CustomizeReportEditPageHeader extends PureComponent {
         return null
     }
 
+    cancelEdit = () => {
+        history.push('/')
+    }
+
     render () {
         return (
             <div className="customize-report-edit-page-header">
                 <div className="customize-report-title">测试报表名称</div>
                 <div className="customize-report-edit-operation">
-                    <Button>取消</Button>
+                    <Button onClick={this.cancelEdit}>取消</Button>
                     <Button appearance="primary">保存</Button>
                     <Button appearance="primary">保存并退出</Button>
                 </div>

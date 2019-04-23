@@ -5,6 +5,7 @@
 
 import axios from 'axios'
 import { getCookie } from "../utils/cookie";
+import { alertError } from "./tips";
 
 // 环境的切换
 if (process.env.NODE_ENV === 'development') {
@@ -77,18 +78,28 @@ axios.interceptors.response.use(response => {
     return Promise.reject(err);
 });
 
-export const postAxios = (url, data) => {
-    return axios({
-        method: 'POST',
-        url,
-        data
+export function postAxios (url, data, error, needReject) {
+    return new Promise((resolve, reject) => {
+        axios.post(url, data).then(res => {
+            resolve(res)
+        }, err => {
+            const errorMessage = err.message || error || '接口调用失败'
+            alertError(errorMessage)
+            needReject && reject(errorMessage)
+        })
     })
 }
 
-export const getAxios = (url, data) => {
-    return axios({
-        method: 'GET',
-        url,
-        data
+export function getAxios (url, data, error, needReject) {
+    return new Promise((resolve, reject) => {
+        axios.get(url, {
+            data: data
+        }).then(res => {
+            resolve(res)
+        }, err => {
+            const errorMessage = err.message || error || '接口调用失败'
+            alertError(errorMessage)
+            needReject && reject(errorMessage)
+        })
     })
 }

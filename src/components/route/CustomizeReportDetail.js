@@ -6,6 +6,7 @@
 import React, { PureComponent } from 'react'
 import { Table, Breadcrumb } from 'rsuite';
 const { Column, HeaderCell, Cell, Pagination } = Table;
+import { Link } from 'react-router-dom'
 
 import TableWithPagination from "../presentational/TableWithPagination";
 
@@ -315,7 +316,7 @@ class CustomizeReportDetail extends PureComponent {
                     <span className="breadcrumb-separator">/</span>
                 )}
                 >
-                    <Breadcrumb.Item to="/">自定义报表</Breadcrumb.Item>
+                    <Breadcrumb.Item componentClass={Link} to="/">自定义报表</Breadcrumb.Item>
                     <Breadcrumb.Item active>某个表单详情</Breadcrumb.Item>
                 </Breadcrumb>
                 <TableWithPagination

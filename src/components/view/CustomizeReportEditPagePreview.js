@@ -10,7 +10,7 @@ import { Select, DateRangePicker, Button } from 'rsuite'
 
 import {
     testAction
-} from "../../action/CustomizeReport";
+} from "../../action/customizeReport";
 
 function mapStateToProps (state) {
     const { customizeReport } = state

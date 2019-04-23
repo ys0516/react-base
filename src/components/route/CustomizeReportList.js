@@ -335,7 +335,9 @@ class CustomizeReportList extends PureComponent {
                 >
                     <Breadcrumb.Item active>自定义报表</Breadcrumb.Item>
                 </Breadcrumb>
-                <div className="table-location" ref="tableLocation"/>
+                <div ref="tableLocation"
+                     className={`customize-table${fakeData.length === 0 ? ' empty' : '' }`}
+                >
                 <Table
                     virtualized
                     bordered
@@ -343,9 +345,6 @@ class CustomizeReportList extends PureComponent {
                     height={tableHeight}
                     headerHeight={80}
                     data={fakeData}
-                    onRowClick={data => {
-                        console.log(data);
-                    }}
                 >
                     <Column width={320} align="center" fixed>
                         <HeaderCell>时段</HeaderCell>
@@ -426,6 +425,7 @@ class CustomizeReportList extends PureComponent {
                         </Cell>
                     </Column>
                 </Table>
+                </div>
             </div>
         )
     }

@@ -4,8 +4,8 @@
 
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types';
-import { Table, Breadcrumb } from 'rsuite';
-const { Column, HeaderCell, Cell, Pagination } = Table;
+import { Table } from 'rsuite';
+const { Pagination } = Table;
 
 import { tablePaginationProps } from "../../constants/TableProps";
 import { getParentNode } from "../../utils/getParentNode";
